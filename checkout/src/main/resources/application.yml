@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: checkout-service
+  #Database Config
+  datasource:
+    url: jdbc:sqlserver://database:1433;databaseName=checkout_db
+    username: admin
+    password: my1Complex2P@ssword!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 8000
+#Eureka Client Config
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url: {http://localhost:8761/eureka}
+
+#Swagger Documentation
+springdoc:
+  swagger-ui:
+    path: /checkout/swagger-ui.html
+
+
+
+
+

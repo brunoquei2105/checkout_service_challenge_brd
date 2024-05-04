@@ -1,0 +1,15 @@
+services:
+  database:
+    image: 'mcr.microsoft.com/azure-sql-edge'
+    container_name: sql_server
+    environment:
+      - 'ACCEPT_EULA=yes'
+      - 'MSSQL_SA_PASSWORD=my1Complex2P@ssword!'
+    ports:
+      - '1433:1433'
+    networks:
+      - database_net
+
+
+networks:
+  database_net:
