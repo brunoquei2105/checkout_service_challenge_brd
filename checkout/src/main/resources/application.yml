@@ -1,16 +1,33 @@
 spring:
   application:
-    name: checkout-service
+    name: payment-service #Name that will be register in eureka server
   #Database Config
   datasource:
     url: jdbc:sqlserver://database:1433;databaseName=checkout_db
     username: admin
-    password: my1Complex2P@ssword!
+    password: ${DATABASE_PASSWD}
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  #Hibernate Config
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+  #Rabbit MQ
+  rabbitmq:
+    host: localhost
+    virtual-host: /
+    port: 15672
+    username: admin
+    password: admin
+    exchange: payment.exchange
+    queue: payment.queue
+    routing-key: payment.routing-key
+    template:
+      reply-timeout: 60000
+
 server:
   port: 8000
 #Eureka Client Config
@@ -26,6 +43,14 @@ eureka:
 springdoc:
   swagger-ui:
     path: /checkout/swagger-ui.html
+
+#Request Mapping
+request:
+  mapping:
+    payment: /api/v1.0/checkout
+
+
+
 
 
 
