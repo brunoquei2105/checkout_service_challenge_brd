@@ -26,13 +26,21 @@ Questoes
 
 1. Diagrama Arquitetura de Softaware Alto Nivel
 
-   https://drive.google.com/file/d/1taqMtTDXF0abMc06cw2cUSB4sxrgPNyt/view?usp=sharing
+   - Diagrama da Arquitetura: https://drive.google.com/file/d/1taqMtTDXF0abMc06cw2cUSB4sxrgPNyt/view?usp=sharing
+   - Diagrama de Clase: https://drive.google.com/drive/u/0/folders/1twrve2HZU2R6PH6v_rMalTJgHoBGKQG3
+   - Diretorio drive: https://drive.google.com/file/d/1EBy-Z2nbSE5uLoxUAr_w53RWfHT9MO2Y/view?usp=sharing
 
 2. Componentes de software do sistema de integração e a tecnologia adotada
    * Lingaguem: java 17
-   * Framawork: springboot 3.2.5
-   * Ferramenta de gerenciamento: maven
-   * Banco de Dados: SQL Serve
+   * Framework: springboot 3.2.5
+   * Ferramenta de gerenciamento: maven/pom.xml
+   * Ferramenta de Containerizacao: docker-compose
+   * Banco de Dados: SQL Serve/Azure-sql-edge(compativel com MACOS M1-ARM)
    * Servidor de Registro: Spring Cloud Eureka
    * Projetos: Spring Web, Spring Data JPA
+<<<<<<< Updated upstream
    * Documentacao: Open-API
+=======
+   * Mensageria: RabbitMQ
+   * Documentacao: Open-API(Swagger)- http://localhost:8000/checkout/swagger-ui.html
+>>>>>>> Stashed changes
