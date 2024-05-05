@@ -35,4 +35,4 @@ Questoes
    * Banco de Dados: SQL Serve
    * Servidor de Registro: Spring Cloud Eureka
    * Projetos: Spring Web, Spring Data JPA
-   * Documentacao: Open-API
+   * Documentacao: Open-API(Swagger)- http://localhost:8000/checkout/swagger-ui.html
