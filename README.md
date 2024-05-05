@@ -38,9 +38,7 @@ Questoes
    * Banco de Dados: SQL Serve/Azure-sql-edge(compativel com MACOS M1-ARM)
    * Servidor de Registro: Spring Cloud Eureka
    * Projetos: Spring Web, Spring Data JPA
-<<<<<<< Updated upstream
    * Documentacao: Open-API
-=======
    * Mensageria: RabbitMQ
    * Documentacao: Open-API(Swagger)- http://localhost:8000/checkout/swagger-ui.html
->>>>>>> Stashed changes
+
