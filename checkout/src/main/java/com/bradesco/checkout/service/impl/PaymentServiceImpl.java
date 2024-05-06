@@ -35,7 +35,6 @@ public class PaymentServiceImpl implements PaymentService {
     public PaymentResponseDTO receivePayment(PaymentRequestDTO paymentRequestDTO) throws WriterException {
 
         Payment payment = Payment.builder()
-                //.id(Long.valueOf(new Random().toString()))
                 .value(new BigDecimal(String.valueOf(paymentRequestDTO.getValue())))
                 .transaction_date(LocalTime.now())
                 .orderId(new Random().nextLong())
@@ -43,7 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .build();
         //Publica os dados do pagamento na fila para ser consumida pelo sistema do banco
         rabbitMQSender.publish(payment);
-        paymentRepository.save(payment.getOrderId());
+        paymentRepository.save(payment);
 
         //gera o qr code para ser retornado no response
         byte[] qrCode = generateQrCode(paymentRequestDTO.getPixKey(), paymentRequestDTO.getValue(), paymentRequestDTO.getBankName());
