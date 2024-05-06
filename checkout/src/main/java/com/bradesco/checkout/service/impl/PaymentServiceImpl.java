@@ -1,6 +1,6 @@
 package com.bradesco.checkout.service.impl;
 
-import com.bradesco.checkout.amqp.publisher.RabbitMQSender;
+
 import com.bradesco.checkout.dto.PaymentRequestDTO;
 import com.bradesco.checkout.dto.PaymentResponseDTO;
 import com.bradesco.checkout.enums.PaymentStatus;
@@ -23,12 +23,11 @@ import java.util.Random;
 public class PaymentServiceImpl implements PaymentService {
 
     private PaymentRepository paymentRepository;
-    private RabbitMQSender rabbitMQSender;
 
     @Autowired
-    public PaymentServiceImpl(PaymentRepository paymentRepository, RabbitMQSender rabbitMQSender){
+    public PaymentServiceImpl(PaymentRepository paymentRepository){
        this.paymentRepository = paymentRepository;
-       this.rabbitMQSender = rabbitMQSender;
+
    }
 
     @Override
@@ -41,7 +40,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .status(PaymentStatus.PENDING)
                 .build();
         //Publica os dados do pagamento na fila para ser consumida pelo sistema do banco
-        rabbitMQSender.publish(payment);
+        //rabbitMQSender.publish(payment);
         paymentRepository.save(payment);
 
         //gera o qr code para ser retornado no response

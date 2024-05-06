@@ -3,9 +3,9 @@ spring:
     name: payment-service #Name that will be register in eureka server
   #Database Config
   datasource:
-    url: jdbc:sqlserver://database:1433;databaseName=checkout_db
-    username: admin
-    password: ${DATABASE_PASSWD}
+    url: jdbc:sqlserver://localhost:1433;databaseName=master;encrypt=false;trustServerCertificate=true;
+    username: sa
+    password: my1Complex2P@ssword!
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   #Hibernate Config
   jpa:
