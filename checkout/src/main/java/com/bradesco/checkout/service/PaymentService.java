@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 
 public interface PaymentService {
 
-    PaymentResponseDTO receivePayment(PaymentRequestDTO paymentRequestDTO) throws WriterException;
+    PaymentResponseDTO receivePayment(PaymentRequestDTO paymentRequestDTO) throws Exception;
     byte[] generateQrCode (String pixKey, BigDecimal value, String bank) throws WriterException;
 }

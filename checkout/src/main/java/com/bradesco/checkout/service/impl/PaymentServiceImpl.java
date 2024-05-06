@@ -13,6 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.Base64;
@@ -31,10 +36,10 @@ public class PaymentServiceImpl implements PaymentService {
    }
 
     @Override
-    public PaymentResponseDTO receivePayment(PaymentRequestDTO paymentRequestDTO) throws WriterException {
+    public PaymentResponseDTO receivePayment(PaymentRequestDTO paymentRequestDTO) throws Exception {
 
         Payment payment = Payment.builder()
-                .value(new BigDecimal(String.valueOf(paymentRequestDTO.getValue())))
+                .value(paymentRequestDTO.getValue())
                 .transaction_date(LocalTime.now())
                 .orderId(new Random().nextLong())
                 .status(PaymentStatus.PENDING)
@@ -47,6 +52,7 @@ public class PaymentServiceImpl implements PaymentService {
         byte[] qrCode = generateQrCode(paymentRequestDTO.getPixKey(), paymentRequestDTO.getValue(), paymentRequestDTO.getBankName());
         String base64Image = Base64.getEncoder().encodeToString(qrCode);
 
+
         return PaymentResponseDTO.builder()
                 .status_transaction(PaymentStatus.IN_PROGRESS.toString())
                 .date_time_transaction(payment.getTransaction_date().toString())
@@ -55,6 +61,19 @@ public class PaymentServiceImpl implements PaymentService {
 
         //TODO: Apos o sistema do banco central processar o pagamento a API de Integracao deve consumir de uma fila
         // o status do Payment e atualizar no DB.
+    }
+
+    //TODO
+    private static BufferedImage generateQRCodeImage(String base64QRCode) throws Exception {
+        byte[] qrCodeBytes = Base64.getDecoder().decode(base64QRCode);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(qrCodeBytes);
+
+        return ImageIO.read(inputStream);
+    }
+
+    //TODO
+    private static void saveQRCodeImage(BufferedImage image, String filePath) throws IOException {
+        ImageIO.write(image, "PNG", new File(filePath));
     }
 
     @Override
